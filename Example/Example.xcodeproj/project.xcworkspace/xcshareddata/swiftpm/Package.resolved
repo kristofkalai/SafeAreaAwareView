@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "safeareaawareview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stateman92/SafeAreaAwareView",
+      "state" : {
+        "revision" : "05d8dae390a71af4fdb53f55bd4eaa696c282d64",
+        "version" : "0.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}

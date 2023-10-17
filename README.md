@@ -17,9 +17,9 @@ Add the following to `Package.swift`:
 SafeAreaAwareView(topSafeAreaContent: {
     Color.red.opacity(0.75)
 }, bottomSafeAreaContent: {
-    Color.white.opacity(0.75)
-}, content: {
     Color.green.opacity(0.75)
+}, content: {
+    Color.white.opacity(0.75)
 })
 ```
 
