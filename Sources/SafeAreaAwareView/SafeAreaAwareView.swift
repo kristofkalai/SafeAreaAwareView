@@ -8,39 +8,43 @@
 import SwiftUI
 
 public struct SafeAreaAwareView<TopContent: View, BottomContent: View, Content: View> {
-    private let topSafeAreaContent: () -> TopContent
-    private let bottomSafeAreaContent: () -> BottomContent
-    private let content: () -> Content
+    private let topSafeAreaContent: TopContent
+    private let bottomSafeAreaContent: BottomContent
+    private let content: Content
 
     public init(
         topSafeAreaContent: @escaping () -> TopContent,
         bottomSafeAreaContent: @escaping () -> BottomContent,
         content: @escaping () -> Content
     ) {
-        self.topSafeAreaContent = topSafeAreaContent
-        self.bottomSafeAreaContent = bottomSafeAreaContent
-        self.content = content
+        self.topSafeAreaContent = topSafeAreaContent()
+        self.bottomSafeAreaContent = bottomSafeAreaContent()
+        self.content = content()
     }
 }
 
 extension SafeAreaAwareView: View {
     public var body: some View {
         VStack(spacing: .zero) {
-            GeometryReader { _ in
-                topSafeAreaContent()
-                    .ignoringSafeArea()
+            GeometryReader.withFixedIdealSize {
+                GeometryReader.withFixedIdealSize {
+                    topSafeAreaContent
+                }
+                .ignoringSafeArea()
             }
             .fixedSize(horizontal: false, vertical: true)
 
             ZStack {
                 Color.clear
 
-                content()
+                content
             }
 
-            GeometryReader { _ in
-                bottomSafeAreaContent()
-                    .ignoringSafeArea()
+            GeometryReader.withFixedIdealSize {
+                GeometryReader.withFixedIdealSize {
+                    bottomSafeAreaContent
+                }
+                .ignoringSafeArea()
             }
             .fixedSize(horizontal: false, vertical: true)
         }
